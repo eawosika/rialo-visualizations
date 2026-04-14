@@ -105,30 +105,54 @@ sup{font-size:8px;color:#a9ddd3;vertical-align:super;line-height:0}
 #sg-wrap sup{font-size:7px;color:#a9ddd3;vertical-align:super;line-height:0}
 
 
-@media (max-width: 375px) {
-  #page { padding: 1rem; }
-  #page-header { flex-direction: column; gap: 10px; }
-  .toprow { margin-bottom: 8px; }
-  .hl { font-size: 13px; }
-  .cta { font-size: 10px; }
-  svg.wmap { max-height: 260px; }
-  .overlay { width: calc(100vw - 20px) !important; right: 5px !important; top: 5px !important; }
-  .ovh { gap: 7px; }
-  .cn { font-size: 12px; }
-  .cs { font-size: 9px; }
-  .hv { font-size: 17px; }
-  .hl2 { font-size: 9.5px; }
-  .row { font-size: 9.5px; }
-  .note { font-size: 9px; }
-  .src-item { font-size: 8px; }
-  .action-row { flex-wrap: wrap; }
-  .read-article { font-size: 10px; padding: 5px 9px; }
-  .action-btn { font-size: 10px; padding: 5px 9px; }
-  .share-menu { min-width: 160px; }
-  .share-item { font-size: 10px; }
-}
 @media (max-width: 600px) {
-  #page-header { flex-direction: column; gap: 8px; }
+  /* ── Layout ── */
+  #page { padding: 0.75rem; }
+  #page-header { flex-direction: column; gap: 8px; align-items: flex-start; }
+  .toprow { margin-bottom: 6px; }
+  .hl { font-size: 13px; }
+  .cta { font-size: 10px; margin-top: 5px; }
+  .action-row { gap: 6px; padding-top: 8px; }
+  .action-btn { font-size: 10px; padding: 4px 9px; }
+  .read-article { font-size: 10px; padding: 4px 9px; }
+  .share-menu { min-width: 160px; right: 0; }
+  .share-item { font-size: 10px; }
+
+  /* ── Map: bigger on mobile so countries are tappable ── */
+  svg.wmap { max-height: 380px; }
+  .mapwrap { border-radius: 8px; }
+
+  /* ── Overlay: bottom sheet instead of side panel ── */
+  .overlay {
+    position: fixed !important;
+    top: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-height: 65vh !important;
+    border-radius: 14px 14px 0 0 !important;
+    overflow-y: auto !important;
+    padding: 12px 14px 20px !important;
+    box-sizing: border-box !important;
+    z-index: 999 !important;
+  }
+
+  /* ── Fact sheet: compact ── */
+  .ovh { gap: 7px; margin-bottom: 7px; padding-bottom: 7px; }
+  .cn { font-size: 11px; }
+  .cs { font-size: 8.5px; }
+  .hero { padding: 7px 9px; margin-bottom: 6px; }
+  .hv { font-size: 17px; }
+  .hl2 { font-size: 9px; }
+  .sec { font-size: 7.5px; margin: 5px 0 2px; }
+  .row { font-size: 9.5px; padding: 2px 0; }
+  .note { font-size: 8.5px; padding: 5px 7px; margin-top: 6px; }
+  .src-title { font-size: 7.5px; }
+  .src-item { font-size: 8px; }
+  .ovc { font-size: 20px; top: 8px; right: 10px; }
+  .sources { margin-top: 7px; padding-top: 6px; }
+}
   svg.wmap { max-height: 320px; }
   .overlay { width: calc(100vw - 20px) !important; right: 5px !important; }
   .hl { font-size: 13px; }
