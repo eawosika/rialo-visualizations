@@ -122,18 +122,19 @@ sup{font-size:8px;color:#a9ddd3;vertical-align:super;line-height:0}
   svg.wmap { max-height: 380px; }
   .mapwrap { border-radius: 8px; }
 
-  /* ── Overlay: floating card on mobile ── */
+  /* ── Overlay: scrollable bottom sheet on mobile ── */
   .overlay {
     position: fixed !important;
     top: auto !important;
-    bottom: 16px !important;
-    left: 12px !important;
-    right: 12px !important;
-    width: auto !important;
-    max-height: 68vh !important;
-    border-radius: 14px !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-height: 60vh !important;
+    border-radius: 16px 16px 0 0 !important;
     overflow-y: auto !important;
-    padding: 16px 18px 24px 18px !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 18px 18px 32px 18px !important;
     box-sizing: border-box !important;
     z-index: 999 !important;
   }
@@ -152,10 +153,6 @@ sup{font-size:8px;color:#a9ddd3;vertical-align:super;line-height:0}
   .src-item { font-size: 8px; }
   .ovc { font-size: 20px; top: 8px; right: 10px; }
   .sources { margin-top: 7px; padding-top: 6px; }
-}
-  svg.wmap { max-height: 320px; }
-  .overlay { width: calc(100vw - 20px) !important; right: 5px !important; }
-  .hl { font-size: 13px; }
 }
 </style>
 </head>
