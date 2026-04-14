@@ -104,6 +104,35 @@ svg.wmap{width:100%;display:block}
 sup{font-size:8px;color:#a9ddd3;vertical-align:super;line-height:0}
 #sg-wrap sup{font-size:7px;color:#a9ddd3;vertical-align:super;line-height:0}
 
+
+@media (max-width: 375px) {
+  #page { padding: 1rem; }
+  #page-header { flex-direction: column; gap: 10px; }
+  .toprow { margin-bottom: 8px; }
+  .hl { font-size: 13px; }
+  .cta { font-size: 10px; }
+  svg.wmap { max-height: 260px; }
+  .overlay { width: calc(100vw - 20px) !important; right: 5px !important; top: 5px !important; }
+  .ovh { gap: 7px; }
+  .cn { font-size: 12px; }
+  .cs { font-size: 9px; }
+  .hv { font-size: 17px; }
+  .hl2 { font-size: 9.5px; }
+  .row { font-size: 9.5px; }
+  .note { font-size: 9px; }
+  .src-item { font-size: 8px; }
+  .action-row { flex-wrap: wrap; }
+  .read-article { font-size: 10px; padding: 5px 9px; }
+  .action-btn { font-size: 10px; padding: 5px 9px; }
+  .share-menu { min-width: 160px; }
+  .share-item { font-size: 10px; }
+}
+@media (max-width: 600px) {
+  #page-header { flex-direction: column; gap: 8px; }
+  svg.wmap { max-height: 320px; }
+  .overlay { width: calc(100vw - 20px) !important; right: 5px !important; }
+  .hl { font-size: 13px; }
+}
 </style>
 </head>
 <body>
@@ -113,10 +142,7 @@ sup{font-size:8px;color:#a9ddd3;vertical-align:super;line-height:0}
     <span style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#a9ddd3;margin-bottom:3px;display:block">Rialo</span>
     <span style="font-size:13px;color:rgba(240,238,234,0.5)">Interactive visualization</span>
   </div>
-  <a class="read-article" href="https://rialo.io/posts/upgrading-the-lending-stack" target="_blank">
-    Read the article
-    <svg width="11" height="11" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
-  </a>
+  <a class="read-article" id="read-article-btn" href="#" target="_blank">Read the article<svg width="11" height="11" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg></a>
 </div>
 
 <div id="wm">
@@ -524,7 +550,7 @@ document.addEventListener('DOMContentLoaded', function(){
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
-var PAGE_URL = window.location.href;
+var PAGE_URL = (window.self !== window.top && document.referrer) ? document.referrer.split('?')[0].split('#')[0] : window.location.href;
 var PAGE_TITLE = 'Global Consumer Credit Markets \u2014 Rialo';
 var PAGE_DESC = 'How consumer credit markets compare around the world: household debt, credit growth, scoring models, and regulators across eight major economies.';
 
@@ -581,6 +607,27 @@ window.addEventListener('resize', reportHeight);
 // Also report after buildGrid runs
 var _origBuildGrid = typeof buildGrid !== 'undefined' ? buildGrid : null;
 if (document.readyState === 'complete') { setTimeout(reportHeight, 300); }
+</script>
+
+<script>
+(function(){
+  var btn = document.getElementById('read-article-btn');
+  var ARTICLE_URL = 'https://www.rialo.io/posts/upgrading-the-lending-stack';
+  var STANDALONE_URL = 'https://eawosika.github.io/rialo-visualizations/world-credit-market-map.html';
+  if (window.self !== window.top) {
+    // Inside iframe — point to standalone
+    btn.href = STANDALONE_URL;
+    btn.target = '_blank';
+    btn.querySelector ? btn.childNodes[0].textContent = 'Open in full view' : null;
+    // Set text node (first child is the text)
+    btn.firstChild.nodeValue = 'Open in full view';
+  } else {
+    // Standalone — point to article
+    btn.href = ARTICLE_URL;
+    btn.target = '_blank';
+    btn.firstChild.nodeValue = 'Read the article';
+  }
+})();
 </script>
 </body>
 </html>
