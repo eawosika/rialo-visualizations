@@ -80,7 +80,7 @@ svg.wmap{width:100%;display:block}
 .cpath:hover{fill:rgba(169,221,211,0.38)}
 .cpath.act{fill:rgba(169,221,211,0.42);stroke:#fff;stroke-width:1}
 .fpin{cursor:pointer}
-.overlay{display:none;position:absolute;top:10px;right:10px;width:330px;max-height:calc(100% - 20px);overflow-y:auto;background:#0f0f0f;border:1px solid rgba(169,221,211,0.25);border-radius:10px;padding:14px;box-shadow:0 8px 32px rgba(0,0,0,0.8)}
+.overlay{display:none;position:absolute;top:10px;right:10px;width:330px;overflow-y:visible;background:#0f0f0f;border:1px solid rgba(169,221,211,0.25);border-radius:10px;padding:14px;box-shadow:0 8px 32px rgba(0,0,0,0.8)}
 .overlay.vis{display:block}
 .ovc{position:absolute;top:9px;right:10px;background:none;border:none;color:rgba(240,238,234,0.35);font-size:17px;cursor:pointer;padding:0;line-height:1;font-family:system-ui}
 .ovc:hover{color:#f0eeea}
@@ -448,6 +448,22 @@ function closeOv(){
   document.getElementById('ov').classList.remove('vis');
   document.querySelectorAll('.cpath').forEach(function(p){p.classList.remove('act')});
 }
+document.querySelector('.mapwrap').addEventListener('click', function(e){
+  var ov = document.getElementById('ov');
+  if(ov.classList.contains('vis') && !ov.contains(e.target) && !e.target.closest('.cpath') && !e.target.closest('.fpin')){
+    closeOv();
+  }
+});
+
+// iframe height reporting
+function reportHeight() {
+  var page = document.getElementById('page');
+  var height = page ? page.scrollHeight : document.documentElement.scrollHeight;
+  window.parent.postMessage({ type: 'rialo-viz-height', height: Math.ceil(height) + 20 }, '*');
+}
+window.addEventListener('load', reportHeight);
+window.addEventListener('resize', reportHeight);
+setTimeout(reportHeight, 300);
 
 // Build static grid with full fact sheets and global source numbering
 var G7 = ['ca','us','uk','de'];
@@ -605,31 +621,6 @@ document.getElementById('share-copy').addEventListener('click', function(){
 </script>
 </div>
 <script>
-// Report page height to parent iframe
-function reportHeight(){
-  var h = document.body.scrollHeight;
-  if(window.parent !== window){
-    window.parent.postMessage({type:'viz-height', height: h}, '*');
-  }
-}
-window.addEventListener('load', reportHeight);
-window.addEventListener('resize', reportHeight);
-// Also report after grid builds and overlays open
-var _origBuildGrid = typeof buildGrid === 'function' ? buildGrid : null;
-setTimeout(reportHeight, 500);
-</script>
-
-<script>
-function reportHeight() {
-  var el = document.getElementById('wm') || document.body;
-  var height = el.getBoundingClientRect().bottom + window.scrollY;
-  window.parent.postMessage({ type: 'rialo-viz-height', height: Math.ceil(height) }, '*');
-}
-window.addEventListener('load', reportHeight);
-window.addEventListener('resize', reportHeight);
-// Also report after buildGrid runs
-var _origBuildGrid = typeof buildGrid !== 'undefined' ? buildGrid : null;
-if (document.readyState === 'complete') { setTimeout(reportHeight, 300); }
 </script>
 
 <script>
