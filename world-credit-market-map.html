@@ -621,8 +621,9 @@ setTimeout(reportHeight, 500);
 
 <script>
 function reportHeight() {
-  var height = document.body.scrollHeight;
-  window.parent.postMessage({ type: 'rialo-viz-height', height: height }, '*');
+  var el = document.getElementById('wm') || document.body;
+  var height = el.getBoundingClientRect().bottom + window.scrollY;
+  window.parent.postMessage({ type: 'rialo-viz-height', height: Math.ceil(height) }, '*');
 }
 window.addEventListener('load', reportHeight);
 window.addEventListener('resize', reportHeight);
