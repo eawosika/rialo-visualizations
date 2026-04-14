@@ -43,7 +43,7 @@ html, body { background: #0a0a0a; min-height: 100vh; font-family: 'Roobert', sys
 .share-item:hover svg { opacity: 1; }
 .share-divider { height: 1px; background: rgba(169,221,211,0.1); margin: 4px 0; }
 #rc-embed { font-family: 'Roobert', system-ui, -apple-system, sans-serif !important; }
-#rc-embed .rc-dl-btn { display: none !important; }
+
 
 
 #rc-embed, #rc-embed * { box-sizing: border-box !important; }
@@ -86,7 +86,7 @@ html, body { background: #0a0a0a; min-height: 100vh; font-family: 'Roobert', sys
 #rc-embed .rc-hover-hint { display: flex; align-items: center; gap: 5px; font-size: 10px; color: rgba(169,221,211,0.5) !important; justify-content: flex-end; margin-bottom: 10px; }
 #rc-embed .rc-hover-hint svg { animation: rc-pulse 2s ease-in-out infinite; }
 @keyframes rc-pulse { 0%, 100% { opacity: 0.4; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-2px); } }
-#rc-embed .rc-dl-btn { display: none !important; }
+
 #rc-embed .has-tip { position: relative !important; cursor: help !important; }
 #rc-embed .has-tip .tip { display: none !important; position: absolute !important; bottom: calc(100% + 8px) !important; left: 50% !important; transform: translateX(-50%) !important; background: #1e1e1e !important; border: 1px solid rgba(169,221,211,0.3) !important; border-radius: 8px !important; padding: 8px 10px !important; font-size: 11px !important; color: #f0eeea !important; line-height: 1.5 !important; width: 210px !important; z-index: 9999 !important; pointer-events: none !important; box-shadow: 0 4px 16px rgba(0,0,0,0.5) !important; }
 #rc-embed .has-tip .tip::after { content: '' !important; position: absolute !important; top: 100% !important; left: 50% !important; transform: translateX(-50%) !important; border: 5px solid transparent !important; border-top-color: rgba(169,221,211,0.3) !important; }
@@ -228,9 +228,7 @@ html, body { background: #0a0a0a; min-height: 100vh; font-family: 'Roobert', sys
     <p class="rc-footnote"><sup>4</sup> SoFi Technologies — <a href="https://s27.q4cdn.com/749715820/files/doc_financials/2025/q4/SoFi-Q4-FY-2025-Earnings-Conference-Call-Transcript.pdf" target="_blank">Q4 2025 Earnings Call Transcript</a> (Jan 2026)</p>
     <p class="rc-footnote"><sup>5</sup> Back-of-envelope calculation from SoFi's publicly reported product counts: 20.2M total products vs. ~2.5M lending products as of Q4 2025</p>
   </div>
-  <div class="rc-footer" id="rc-footer">
-    <button class="rc-dl-btn" id="dl-btn">Download as JPG</button>
-  </div>
+  <div class="rc-footer" id="rc-footer"></div>
 </div>
 
   <div class="action-row">
@@ -310,14 +308,16 @@ document.getElementById('share-copy').addEventListener('click', function(){
 // Download as JPG
 document.getElementById('dl-btn').addEventListener('click', function() {
   var actionRow = document.querySelector('.action-row');
-  var footer = document.getElementById('rc-footer');
+  var pageHeader = document.getElementById('page-header');
+  var target = document.getElementById('rc-embed');
   actionRow.style.visibility = 'hidden';
-  if(footer) footer.style.visibility = 'hidden';
+  pageHeader.style.visibility = 'hidden';
   setTimeout(function() {
-    var target = document.getElementById('rc-embed');
     html2canvas(target, {
       backgroundColor: '#0a0a0a',
       scale: 2,
+      width: target.offsetWidth,
+      height: target.offsetHeight,
       useCORS: true,
       logging: false
     }).then(function(canvas) {
@@ -326,7 +326,7 @@ document.getElementById('dl-btn').addEventListener('click', function() {
       link.href = canvas.toDataURL('image/jpeg', 0.95);
       link.click();
       actionRow.style.visibility = '';
-      if(footer) footer.style.visibility = '';
+      pageHeader.style.visibility = '';
     });
   }, 50);
 });
