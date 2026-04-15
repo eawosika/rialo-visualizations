@@ -261,7 +261,7 @@ sup{font-size:8px;color:#a9ddd3;vertical-align:super;line-height:0}
       </button>
     </div>
   </div>
-    <button class="action-btn" id="sg-dl">Download as JPG</button>
+    <a class="action-btn" href="https://eawosika.github.io/rialo-visualizations/world-credit-market-map-v1.jpg" download>Download as JPG</a>
   </div>
 </div>
 <script>
@@ -556,27 +556,6 @@ function buildGrid(){
 }
 document.addEventListener('DOMContentLoaded', function(){
   buildGrid();
-  document.getElementById('sg-dl').addEventListener('click', function(){
-    var wrap = document.getElementById('sg-wrap');
-    wrap.style.position = 'absolute';
-    wrap.style.top = '0';
-    wrap.style.left = '0';
-    wrap.style.zIndex = '-1';
-    setTimeout(function(){
-      var w = wrap.scrollWidth;
-      var h = wrap.scrollHeight;
-      html2canvas(wrap,{backgroundColor:'#0a0a0a',scale:2,useCORS:true,logging:false,width:w,height:h,windowWidth:w,windowHeight:h}).then(function(canvas){
-        var link = document.createElement('a');
-        link.download = 'consumer-credit-markets.jpg';
-        link.href = canvas.toDataURL('image/jpeg',0.95);
-        link.click();
-        wrap.style.position = 'fixed';
-        wrap.style.top = '-9999px';
-        wrap.style.left = '-9999px';
-        wrap.style.zIndex = '';
-      });
-    }, 50);
-  });
 }); // DOMContentLoaded
 
 </script>
@@ -608,7 +587,6 @@ document.addEventListener('DOMContentLoaded', function(){
   </div>
   <div id="sg-inner"></div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
 var PAGE_URL = 'https://eawosika.github.io/rialo-visualizations/world-credit-market-map.html';
 var PAGE_TITLE = 'Global Consumer Credit Markets \u2014 Rialo';
