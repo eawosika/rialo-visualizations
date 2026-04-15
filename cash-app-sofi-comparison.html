@@ -258,11 +258,10 @@ html, body { background: #0a0a0a; min-height: 100vh; font-family: 'Roobert', sys
         </button>
       </div>
     </div>
-    <button class="action-btn" id="dl-btn">Download as JPG</button>
+    <a class="action-btn" href="https://eawosika.github.io/rialo-visualizations/cash-app-sofi-comparison-v3.jpg" download>Download as JPG</a>
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
 // Iframe detection
 (function(){
@@ -306,34 +305,12 @@ document.getElementById('share-copy').addEventListener('click', function(){
 });
 
 // Download as JPG
-document.getElementById('dl-btn').addEventListener('click', function() {
-  var actionRow = document.querySelector('.action-row');
-  var pageHeader = document.getElementById('page-header');
-  var target = document.getElementById('rc-embed');
-  actionRow.style.visibility = 'hidden';
-  pageHeader.style.visibility = 'hidden';
-  setTimeout(function() {
-    html2canvas(target, {
-      backgroundColor: '#0a0a0a',
-      scale: 2,
-      width: target.offsetWidth,
-      height: target.offsetHeight,
-      useCORS: true,
-      logging: false
-    }).then(function(canvas) {
-      var link = document.createElement('a');
-      link.download = 'cash-app-sofi-comparison.jpg';
-      link.href = canvas.toDataURL('image/jpeg', 0.95);
-      link.click();
-      actionRow.style.visibility = '';
-      pageHeader.style.visibility = '';
-    });
-  }, 50);
-});
 
 // postMessage height reporter
 function reportHeight() {
-  window.parent.postMessage({ type: 'rialo-viz-height', height: document.body.scrollHeight }, '*');
+  var page = document.getElementById('page');
+  var height = page ? page.scrollHeight : document.documentElement.scrollHeight;
+  window.parent.postMessage({ type: 'rialo-viz-height', height: Math.ceil(height) + 20 }, '*');
 }
 window.addEventListener('load', reportHeight);
 window.addEventListener('resize', reportHeight);

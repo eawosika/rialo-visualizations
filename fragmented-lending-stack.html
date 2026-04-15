@@ -258,11 +258,10 @@ html, body { background: #0a0a0a; font-family: 'Roobert', system-ui, sans-serif;
         </button>
       </div>
     </div>
-    <button class="action-btn" id="dl-btn">Download as JPG</button>
+    <a class="action-btn" href="https://eawosika.github.io/rialo-visualizations/fragmented-lending-stack-v3.jpg" download>Download as JPG</a>
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
 var PAGE_URL = 'https://eawosika.github.io/rialo-visualizations/fragmented-lending-stack.html';
 var PAGE_TITLE = 'The Fragmented Lending Stack: Rialo';
@@ -298,44 +297,8 @@ document.getElementById('share-copy').addEventListener('click', function(){
   });
 });
 
-document.getElementById('dl-btn').addEventListener('click', function() {
-  var actionRow = document.querySelector('.action-row');
-  var pageHeader = document.getElementById('page-header');
-  var target = document.getElementById('page');
-  actionRow.style.visibility = 'hidden';
-  pageHeader.style.visibility = 'hidden';
-  setTimeout(function() {
-    html2canvas(target, {
-      backgroundColor: '#0a0a0a',
-      scale: 2,
-      useCORS: true,
-      logging: false
-    }).then(function(canvas) {
-      var link = document.createElement('a');
-      link.download = 'fragmented-lending-stack.jpg';
-      link.href = canvas.toDataURL('image/jpeg', 0.95);
-      link.click();
-      actionRow.style.visibility = '';
-      pageHeader.style.visibility = '';
-    });
-  }, 50);
-});
 
 // Mobile action buttons
-var mobDl = document.getElementById('mob-dl-btn');
-var mobShare = document.getElementById('mob-share-btn');
-if (mobDl) {
-  mobDl.addEventListener('click', function() {
-    document.getElementById('dl-btn').click();
-  });
-}
-if (mobShare) {
-  mobShare.addEventListener('click', function(e) {
-    e.stopPropagation();
-    document.getElementById('sg-share').click();
-  });
-}
-
 function reportHeight() {
   var page = document.getElementById('page');
   var height = page ? page.scrollHeight : document.documentElement.scrollHeight;
