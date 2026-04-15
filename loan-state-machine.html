@@ -65,12 +65,12 @@ html, body { background: #0a0a0a; font-family: 'Roobert', system-ui, sans-serif;
 
 /* Choices */
 .choices { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
-.choice-btn { background: #141414; border: 1px solid rgba(169,221,211,0.2); border-radius: 8px; padding: 12px 16px; text-align: left; cursor: pointer; font-family: 'Roobert', system-ui, sans-serif; color: #f0eeea; font-size: 12px; line-height: 1.4; transition: background 0.15s, border-color 0.15s; }
-.choice-btn:hover { background: rgba(169,221,211,0.06); border-color: rgba(169,221,211,0.35); }
+.choice-btn { background: rgba(169,221,211,0.05); border: 1px solid rgba(169,221,211,0.35); border-radius: 8px; padding: 12px 16px; text-align: left; cursor: pointer; font-family: 'Roobert', system-ui, sans-serif; color: #f0eeea; font-size: 12px; line-height: 1.4; transition: background 0.2s, border-color 0.2s, box-shadow 0.2s; box-shadow: 0 0 0 0 rgba(169,221,211,0); }
+.choice-btn:hover { background: rgba(169,221,211,0.1); border-color: rgba(169,221,211,0.6); box-shadow: 0 0 12px rgba(169,221,211,0.12); }
 .choice-btn .choice-label { font-weight: 500; color: #f0eeea; display: block; margin-bottom: 2px; }
 .choice-btn .choice-sub { font-size: 10.5px; color: rgba(240,238,234,0.45); }
-.choice-btn.danger-choice { border-color: rgba(240,100,100,0.2); }
-.choice-btn.danger-choice:hover { background: rgba(240,100,100,0.05); border-color: rgba(240,100,100,0.35); }
+.choice-btn.danger-choice { background: rgba(240,100,100,0.04); border-color: rgba(240,100,100,0.35); }
+.choice-btn.danger-choice:hover { background: rgba(240,100,100,0.08); border-color: rgba(240,100,100,0.6); box-shadow: 0 0 12px rgba(240,100,100,0.1); }
 
 /* Progress bar */
 .progress-wrap { margin-bottom: 16px; }
@@ -182,8 +182,7 @@ function restart() {
 }
 
 function addEvent(text, type) {
-  state.events.unshift({ text: text, type: type || 'neutral' });
-  if (state.events.length > 5) state.events.pop();
+  state.events = [{ text: text, type: type || 'neutral' }];
 }
 
 function fmt(n) {
@@ -239,7 +238,7 @@ function render() {
     var principal = MONTHLY_PMT - interest;
     desc.textContent = 'Your payment of $178 covers $' + interest + ' in interest and $' + principal + ' in principal. Remaining balance after payment: ' + fmt(Math.max(0, bal - MONTHLY_PMT)) + '.';
     choices.innerHTML =
-      '<button class="choice-btn" onclick="makePayment()"><span class="choice-label">Make payment — $178</span><span class="choice-sub">Pay on time. Balance reduces, no fees.</span></button>' +
+      '<button class="choice-btn" onclick="makePayment()"><span class="choice-label">Make payment: $178</span><span class="choice-sub">Pay on time. Balance reduces, no fees.</span></button>' +
       '<button class="choice-btn danger-choice" onclick="missPayment()"><span class="choice-label">Skip this payment</span><span class="choice-sub">Miss the payment. A ' + GRACE_DAYS + '-day grace period begins.</span></button>';
 
   } else if (state.phase === 'missed') {
@@ -248,7 +247,7 @@ function render() {
     title.textContent = 'You missed a payment.';
     desc.textContent = 'A late fee of $35 has been added to your balance. You have ' + GRACE_DAYS + ' days to cure before your loan becomes delinquent.';
     choices.innerHTML =
-      '<button class="choice-btn" onclick="cureFromMissed()"><span class="choice-label">Pay now — ' + fmt(MONTHLY_PMT + state.fees) + '</span><span class="choice-sub">Catch up including late fee. Loan returns to active.</span></button>' +
+      '<button class="choice-btn" onclick="cureFromMissed()"><span class="choice-label">Pay now: ' + fmt(MONTHLY_PMT + state.fees) + '</span><span class="choice-sub">Catch up including late fee. Loan returns to active.</span></button>' +
       '<button class="choice-btn danger-choice" onclick="goDelinquent()"><span class="choice-label">Cannot pay right now</span><span class="choice-sub">Grace period expires. Loan becomes delinquent. Your credit bureau report is updated.</span></button>';
       '<button class="choice-btn danger-choice" onclick="goDelinquent()"><span class="choice-label">Cannot pay right now</span><span class="choice-sub">Grace period expires. Loan becomes delinquent. Your credit bureau report is updated.</span></button>';
   } else if (state.phase === 'delinquent') {
@@ -257,7 +256,7 @@ function render() {
     title.textContent = 'Your loan is delinquent.';
     desc.textContent = 'Your missed payment has been reported to credit bureaus. You have ' + CURE_DAYS + ' days to cure before default. An additional late fee has been applied.';
     choices.innerHTML =
-      '<button class="choice-btn" onclick="cureDelinquent()"><span class="choice-label">Make full payment — ' + fmt(MONTHLY_PMT * 2 + state.fees) + '</span><span class="choice-sub">Pay all overdue amounts including fees. Loan returns to active.</span></button>' +
+      '<button class="choice-btn" onclick="cureDelinquent()"><span class="choice-label">Make full payment: ' + fmt(MONTHLY_PMT * 2 + state.fees) + '</span><span class="choice-sub">Pay all overdue amounts including fees. Loan returns to active.</span></button>' +
       '<button class="choice-btn danger-choice" onclick="goDefault()"><span class="choice-label">Still cannot pay</span><span class="choice-sub">Cure period expires. Loan enters default. Enforcement begins automatically.</span></button>';
       '<button class="choice-btn danger-choice" onclick="goDefault()"><span class="choice-label">Still cannot pay</span><span class="choice-sub">Cure period expires. Loan enters default. Enforcement begins automatically.</span></button>';
   } else if (state.phase === 'default') {
@@ -274,7 +273,7 @@ function render() {
     var colBal = calcBalance(state.paymentsLeft, state.fees);
     desc.textContent = 'A collections agency has taken over your account. You owe ' + fmt(colBal) + '. You may settle for a reduced amount or the debt will be charged off.';
     choices.innerHTML =
-      '<button class="choice-btn" onclick="settleDebt()"><span class="choice-label">Settle debt — ' + fmt(Math.round(colBal * 0.6)) + '</span><span class="choice-sub">Accept a settlement at 60 cents on the dollar. Negative mark remains on credit report.</span></button>' +
+      '<button class="choice-btn" onclick="settleDebt()"><span class="choice-label">Settle debt: ' + fmt(Math.round(colBal * 0.6)) + '</span><span class="choice-sub">Accept a settlement at 60 cents on the dollar. Negative mark remains on credit report.</span></button>' +
       '<button class="choice-btn danger-choice" onclick="goChargedOff()"><span class="choice-label">Dispute / ignore</span><span class="choice-sub">Debt is written off as a loss. Charged-off status on credit report for 7 years.</span></button>';
 
   } else if (state.phase === 'settled') {
@@ -297,8 +296,8 @@ function render() {
     badge.textContent = 'Paid off';
     title.textContent = 'Loan fully repaid.';
     var totalInt = Math.round(MONTHLY_PMT * state.paymentsMade - (PRINCIPAL - calcBalance(0, 0)));
-    desc.textContent = "Congratulations — you have repaid your $2,000 loan in full. Total interest paid: approximately $" + (MONTHLY_PMT * TERM - PRINCIPAL) + ". Your credit history shows " + TERM + " on-time payments.";
-    desc.textContent = "Congratulations — you have repaid your $2,000 loan in full. Total interest paid: approximately $" + (MONTHLY_PMT * TERM - PRINCIPAL) + ". Your credit history shows " + TERM + " on-time payments.";
+    desc.textContent = "Congratulations, you have repaid your $2,000 loan in full. Total interest paid: approximately $" + (MONTHLY_PMT * TERM - PRINCIPAL) + ". Your credit history shows " + TERM + " on-time payments.";
+    desc.textContent = "Congratulations, you have repaid your $2,000 loan in full. Total interest paid: approximately $" + (MONTHLY_PMT * TERM - PRINCIPAL) + ". Your credit history shows " + TERM + " on-time payments.";
   }
 }
 
@@ -310,10 +309,10 @@ function makePayment() {
   state.paymentsLeft--;
   state.paymentsMade++;
   state.month++;
-  addEvent('<strong>Payment received</strong> — $178 applied. Interest: $' + interest + '. Principal: $' + (MONTHLY_PMT - interest) + '.', 'good');
+  addEvent('<strong>Payment received</strong>: $178 applied. Interest: $' + interest + '. Principal: $' + (MONTHLY_PMT - interest) + '.', 'good');
   if (state.paymentsLeft === 0) {
     state.phase = 'paidoff';
-    addEvent('<strong>Loan closed</strong> — all payments complete.', 'good');
+    addEvent('<strong>Loan closed</strong>: all payments complete.', 'good');
   } else {
     state.phase = 'active';
   }
@@ -324,7 +323,7 @@ function missPayment() {
   state.fees += LATE_FEE;
   state.missedCount++;
   state.phase = 'missed';
-  addEvent('<strong>Payment missed</strong> — $35 late fee added. Grace period: ' + GRACE_DAYS + ' days.', 'warn');
+  addEvent('<strong>Payment missed</strong>: $35 late fee added. Grace period: ' + GRACE_DAYS + ' days.', 'warn');
   render();
 }
 
@@ -335,7 +334,7 @@ function cureFromMissed() {
   state.paymentsMade++;
   state.month++;
   state.phase = 'active';
-  addEvent('<strong>Payment cured</strong> — $' + paid + ' received including late fee. Loan back to active.', 'good');
+  addEvent('<strong>Payment cured</strong>: $' + paid + ' received including late fee. Loan back to active.', 'good');
   if (state.paymentsLeft === 0) state.phase = 'paidoff';
   render();
 }
@@ -343,7 +342,7 @@ function cureFromMissed() {
 function goDelinquent() {
   state.fees += LATE_FEE;
   state.phase = 'delinquent';
-  addEvent('<strong>Delinquency reported</strong> — missed payment reported to credit bureaus. Additional $35 fee applied.', 'bad');
+  addEvent('<strong>Delinquency reported</strong>: missed payment reported to credit bureaus. Additional $35 fee applied.', 'bad');
   render();
 }
 
@@ -354,7 +353,7 @@ function cureDelinquent() {
   state.paymentsMade += 2;
   state.month += 2;
   state.phase = 'active';
-  addEvent('<strong>Account cured</strong> — $' + paid + ' received. Loan returned to active status.', 'good');
+  addEvent('<strong>Account cured</strong>: $' + paid + ' received. Loan returned to active status.', 'good');
   if (state.paymentsLeft <= 0) state.phase = 'paidoff';
   render();
 }
@@ -362,13 +361,13 @@ function cureDelinquent() {
 function goDefault() {
   state.fees += LATE_FEE;
   state.phase = 'default';
-  addEvent('<strong>Default triggered</strong> — cure period elapsed. Enforcement initiated automatically.', 'bad');
+  addEvent('<strong>Default triggered</strong>: cure period elapsed. Enforcement initiated automatically.', 'bad');
   render();
 }
 
 function goCollections() {
   state.phase = 'collections';
-  addEvent('<strong>Referred to collections</strong> — account transferred to collections agency.', 'bad');
+  addEvent('<strong>Referred to collections</strong>: account transferred to collections agency.', 'bad');
   render();
 }
 
@@ -376,13 +375,13 @@ function settleDebt() {
   var colBal = calcBalance(state.paymentsLeft, state.fees);
   var settlement = Math.round(colBal * 0.6);
   state.phase = 'settled';
-  addEvent('<strong>Debt settled</strong> — paid $' + settlement + ' of $' + colBal + ' owed.', 'warn');
+  addEvent('<strong>Debt settled</strong>: paid $' + settlement + ' of $' + colBal + ' owed.', 'warn');
   render();
 }
 
 function goChargedOff() {
   state.phase = 'chargedoff';
-  addEvent('<strong>Charged off</strong> — debt written off as a loss. Negative mark on credit report for 7 years.', 'bad');
+  addEvent('<strong>Charged off</strong>: debt written off as a loss. Negative mark on credit report for 7 years.', 'bad');
   render();
 }
 
