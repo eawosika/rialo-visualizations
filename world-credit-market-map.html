@@ -80,8 +80,7 @@ svg.wmap{width:100%;display:block}
 .cpath:hover{fill:rgba(169,221,211,0.38)}
 .cpath.act{fill:rgba(169,221,211,0.42);stroke:#fff;stroke-width:1}
 .fpin{cursor:pointer}
-.overlay{display:none;position:absolute;top:10px;right:10px;width:330px;overflow-y:visible;background:#0f0f0f;border:1px solid rgba(169,221,211,0.25);border-radius:10px;padding:14px;box-shadow:0 8px 32px rgba(0,0,0,0.8)}
-.embedded .overlay{position:fixed !important;top:auto !important;bottom:16px !important;right:14px !important;left:14px !important;width:auto !important;max-height:65vh !important;overflow-y:auto !important;-webkit-overflow-scrolling:touch !important;z-index:999 !important;}
+.overlay{display:none;position:absolute;top:10px;right:10px;width:330px;max-height:calc(100% - 20px);overflow-y:auto;-webkit-overflow-scrolling:touch;background:#0f0f0f;border:1px solid rgba(169,221,211,0.25);border-radius:10px;padding:14px;box-shadow:0 8px 32px rgba(0,0,0,0.8)}
 .overlay.vis{display:block}
 .ovc{position:absolute;top:9px;right:10px;background:none;border:none;color:rgba(240,238,234,0.35);font-size:17px;cursor:pointer;padding:0;line-height:1;font-family:system-ui}
 .ovc:hover{color:#f0eeea}
@@ -458,7 +457,11 @@ document.querySelector('.mapwrap').addEventListener('click', function(e){
 
 // iframe height reporting
 // Detect iframe embedding and apply scrollable overlay
-if (window.self !== window.top) {
+try {
+  if (window.self !== window.top) {
+    document.body.classList.add('embedded');
+  }
+} catch(e) {
   document.body.classList.add('embedded');
 }
 
