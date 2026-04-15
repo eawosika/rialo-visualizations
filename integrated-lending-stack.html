@@ -225,95 +225,10 @@ html, body { background: #0a0a0a; font-family: 'Roobert', system-ui, sans-serif;
     </div>
   </div>
 
-  <div class="action-row">
-    <div class="share-wrap">
-      <button class="action-btn" id="sg-share">Share visualization</button>
-      <div class="share-menu" id="share-menu">
-        <a class="share-item" id="share-linkedin" href="#" target="_blank" rel="noopener">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
-        <a class="share-item" id="share-x" href="#" target="_blank" rel="noopener">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          X / Twitter
-        </a>
-        <a class="share-item" id="share-reddit" href="#" target="_blank" rel="noopener">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><path fill="#0a0a0a" d="M17.5 12a1.5 1.5 0 00-2.5-1.1 7.6 7.6 0 00-4-.9l.7-3.1 2.2.5a1.1 1.1 0 102.1-.1l-2.5-.5a.3.3 0 00-.4.2l-.8 3.5a7.6 7.6 0 00-4 .9A1.5 1.5 0 006.5 12a1.5 1.5 0 00.8 1.3 3.5 3.5 0 000 .5c0 2.4 2.7 4.2 6.2 4.2s6.2-1.8 6.2-4.2a3.5 3.5 0 000-.5 1.5 1.5 0 00.8-1.3zm-9 1a1 1 0 112 0 1 1 0 01-2 0zm5.5 2.6a3.5 3.5 0 01-4 0 .3.3 0 01.4-.4 2.9 2.9 0 003.2 0 .3.3 0 01.4.4zm-.2-1.6a1 1 0 110-2 1 1 0 010 2z"/></svg>
-          Reddit
-        </a>
-        <a class="share-item" id="share-email" href="#">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
-          Email
-        </a>
-        <div class="share-divider"></div>
-        <button class="share-item" id="share-copy">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          <span id="copy-label">Copy link</span>
-        </button>
-      </div>
-    </div>
-    <button class="action-btn" id="dl-btn">Download as JPG</button>
-  </div>
+
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
-var PAGE_URL = 'https://eawosika.github.io/rialo-visualizations/integrated-lending-stack.html';
-var PAGE_TITLE = 'The Integrated Lending Stack on Rialo';
-var ARTICLE_URL = 'https://www.rialo.io/posts/upgrading-the-lending-stack';
-
-(function(){
-  var btn = document.getElementById('read-article-btn');
-  if (window.self !== window.top) {
-    btn.href = PAGE_URL;
-    btn.firstChild.nodeValue = 'Open in full view';
-  } else {
-    btn.href = ARTICLE_URL;
-    btn.firstChild.nodeValue = 'Read the article';
-  }
-})();
-
-document.getElementById('sg-share').addEventListener('click', function(e){
-  e.stopPropagation();
-  document.getElementById('share-menu').classList.toggle('open');
-});
-document.addEventListener('click', function(){ document.getElementById('share-menu').classList.remove('open'); });
-document.getElementById('share-menu').addEventListener('click', function(e){ e.stopPropagation(); });
-document.getElementById('share-linkedin').href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(PAGE_URL);
-document.getElementById('share-x').href = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(PAGE_URL) + '&text=' + encodeURIComponent(PAGE_TITLE);
-document.getElementById('share-reddit').href = 'https://www.reddit.com/submit?url=' + encodeURIComponent(PAGE_URL) + '&title=' + encodeURIComponent(PAGE_TITLE);
-document.getElementById('share-email').href = 'mailto:?subject=' + encodeURIComponent(PAGE_TITLE) + '&body=' + encodeURIComponent(PAGE_URL);
-document.getElementById('share-copy').addEventListener('click', function(){
-  if(navigator.clipboard) navigator.clipboard.writeText(PAGE_URL).then(function(){
-    var lbl = document.getElementById('copy-label');
-    lbl.textContent = 'Copied';
-    setTimeout(function(){ lbl.textContent = 'Copy link'; }, 2000);
-  });
-});
-
-document.getElementById('dl-btn').addEventListener('click', function() {
-  var actionRow = document.querySelector('.action-row');
-  var pageHeader = document.getElementById('page-header');
-  var target = document.getElementById('page');
-  actionRow.style.visibility = 'hidden';
-  pageHeader.style.visibility = 'hidden';
-  setTimeout(function() {
-    html2canvas(target, {
-      backgroundColor: '#0a0a0a',
-      scale: 2,
-      useCORS: true,
-      logging: false
-    }).then(function(canvas) {
-      var link = document.createElement('a');
-      link.download = 'integrated-lending-stack.jpg';
-      link.href = canvas.toDataURL('image/jpeg', 0.95);
-      link.click();
-      actionRow.style.visibility = '';
-      pageHeader.style.visibility = '';
-    });
-  }, 50);
-});
-
 function reportHeight() {
   var page = document.getElementById('page');
   var height = page ? page.scrollHeight : document.documentElement.scrollHeight;
