@@ -99,8 +99,8 @@ html, body { background: #0a0a0a; font-family: 'Roobert', system-ui, sans-serif;
 .modal-header-actions { display: flex; align-items: center; gap: 8px; }
 .modal-read-article { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: rgba(169,221,211,0.6); text-decoration: none; border: 1px solid rgba(169,221,211,0.2); border-radius: 5px; padding: 4px 10px; transition: all 0.15s; white-space: nowrap; }
 .modal-read-article:hover { color: #a9ddd3; border-color: rgba(169,221,211,0.4); }
-.modal-newtab { display: inline-flex; align-items: center; justify-content: center; padding: 5px 7px; border-radius: 5px; border: 1px solid rgba(240,238,234,0.1); color: rgba(240,238,234,0.35); text-decoration: none; transition: all 0.15s; }
-.modal-newtab:hover { border-color: rgba(169,221,211,0.3); color: #a9ddd3; }
+.modal-newtab { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: rgba(169,221,211,0.6); text-decoration: none; border: 1px solid rgba(169,221,211,0.2); border-radius: 5px; padding: 4px 10px; transition: all 0.15s; white-space: nowrap; }
+.modal-newtab:hover { color: #a9ddd3; border-color: rgba(169,221,211,0.4); }
 .modal-close { background: none; border: none; cursor: pointer; color: rgba(240,238,234,0.35); padding: 4px 6px; border-radius: 4px; display: flex; align-items: center; transition: color 0.15s; margin-left: 4px; }
 .modal-close:hover { color: #f0eeea; }
 .modal iframe { flex: 1; border: none; width: 100%; }
@@ -249,8 +249,9 @@ html, body { background: #0a0a0a; font-family: 'Roobert', system-ui, sans-serif;
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
           Read the article
         </a>
-        <a class="modal-newtab" id="modal-newtab-link" href="#" target="_blank" title="Open in new tab">
-          <svg width="13" height="13" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
+        <a class="modal-newtab" id="modal-newtab-link" href="#" target="_blank">
+          Open in new tab
+          <svg width="11" height="11" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
         </a>
         <button class="modal-close" onclick="closeModal(null)">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -274,7 +275,13 @@ function openModal(url, title, article) {
   document.getElementById('modal-title').textContent = title;
   document.getElementById('modal-article-link').href = article;
   document.getElementById('modal-newtab-link').href = url;
-  document.getElementById('modal-iframe').src = url + '?embed=1&context=index';
+  var iframe = document.getElementById('modal-iframe');
+  iframe.src = url + '?embed=1';
+  iframe.onload = function() {
+    try {
+      iframe.contentWindow.postMessage({ type: 'rialo-hide-header' }, '*');
+    } catch(e) {}
+  };
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
