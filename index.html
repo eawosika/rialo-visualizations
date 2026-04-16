@@ -17,49 +17,37 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body {
-  background: #0a0a0a;
-  font-family: 'Roobert', system-ui, sans-serif;
-  color: #f0eeea;
-  min-height: 100vh;
-}
+html, body { background: #0a0a0a; font-family: 'Roobert', system-ui, sans-serif; color: #f0eeea; min-height: 100vh; }
 
-/* Page */
 #page { max-width: 1080px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
 
-/* Header */
 .site-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(169,221,211,0.1); }
 .site-brand { display: flex; flex-direction: column; gap: 3px; }
 .site-name { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #a9ddd3; }
 .site-tagline { font-size: 22px; font-weight: 500; color: #f0eeea; }
 .site-count { font-size: 11px; color: rgba(240,238,234,0.35); margin-top: 2px; }
 
-/* Controls */
 .controls { display: flex; align-items: center; gap: 10px; }
 .view-toggle { display: flex; gap: 3px; background: rgba(169,221,211,0.05); border: 1px solid rgba(169,221,211,0.12); border-radius: 7px; padding: 3px; }
 .view-btn { background: none; border: none; cursor: pointer; padding: 5px 8px; border-radius: 5px; color: rgba(240,238,234,0.4); transition: all 0.15s; display: flex; align-items: center; }
 .view-btn.active { background: rgba(169,221,211,0.1); color: #a9ddd3; }
 .view-btn:hover:not(.active) { color: rgba(240,238,234,0.7); }
 
-/* Grid view */
 .viz-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 @media (max-width: 860px) { .viz-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .viz-grid { grid-template-columns: 1fr; } }
 
-/* List view */
 .viz-list { display: flex; flex-direction: column; gap: 10px; }
-.viz-list .card { display: grid; grid-template-columns: 180px 1fr; border-radius: 10px; overflow: hidden; }
-.viz-list .card-thumb { height: 100%; min-height: 110px; }
+.viz-list .card { display: grid; grid-template-columns: 200px 1fr; border-radius: 10px; overflow: hidden; }
+.viz-list .card-thumb { height: 100%; min-height: 120px; aspect-ratio: unset; }
 .viz-list .card-thumb img { height: 100%; object-fit: cover; }
 .viz-list .card-body { padding: 16px 18px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 .viz-list .card-actions { flex-direction: row; gap: 8px; flex-shrink: 0; }
 
-/* Card */
-.card { background: #111; border: 1px solid rgba(169,221,211,0.12); border-radius: 10px; overflow: hidden; transition: border-color 0.15s; cursor: default; }
+.card { background: #111; border: 1px solid rgba(169,221,211,0.12); border-radius: 10px; overflow: hidden; transition: border-color 0.15s; }
 .card:hover { border-color: rgba(169,221,211,0.3); }
 
 .card-thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; cursor: pointer; }
-.viz-list .card-thumb { aspect-ratio: unset; }
 .card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
 .card:hover .card-thumb img { transform: scale(1.02); }
 .card-thumb-overlay { position: absolute; inset: 0; background: rgba(10,10,10,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s; }
@@ -109,9 +97,11 @@ html, body {
 }
 .modal-title { font-size: 12px; color: rgba(240,238,234,0.5); }
 .modal-header-actions { display: flex; align-items: center; gap: 8px; }
-.modal-ext { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: rgba(169,221,211,0.6); text-decoration: none; border: 1px solid rgba(169,221,211,0.2); border-radius: 5px; padding: 4px 10px; transition: all 0.15s; }
-.modal-ext:hover { color: #a9ddd3; border-color: rgba(169,221,211,0.4); }
-.modal-close { background: none; border: none; cursor: pointer; color: rgba(240,238,234,0.35); padding: 4px; border-radius: 4px; display: flex; align-items: center; transition: color 0.15s; }
+.modal-read-article { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: rgba(169,221,211,0.6); text-decoration: none; border: 1px solid rgba(169,221,211,0.2); border-radius: 5px; padding: 4px 10px; transition: all 0.15s; white-space: nowrap; }
+.modal-read-article:hover { color: #a9ddd3; border-color: rgba(169,221,211,0.4); }
+.modal-newtab { display: inline-flex; align-items: center; justify-content: center; padding: 5px 7px; border-radius: 5px; border: 1px solid rgba(240,238,234,0.1); color: rgba(240,238,234,0.35); text-decoration: none; transition: all 0.15s; }
+.modal-newtab:hover { border-color: rgba(169,221,211,0.3); color: #a9ddd3; }
+.modal-close { background: none; border: none; cursor: pointer; color: rgba(240,238,234,0.35); padding: 4px 6px; border-radius: 4px; display: flex; align-items: center; transition: color 0.15s; margin-left: 4px; }
 .modal-close:hover { color: #f0eeea; }
 .modal iframe { flex: 1; border: none; width: 100%; }
 
@@ -145,9 +135,9 @@ html, body {
   </div>
 
   <div class="viz-grid" id="viz-container">
-      <div class="card" data-url="https://eawosika.github.io/rialo-visualizations/world-credit-market-map.html" data-title="World credit markets">
-        <div class="card-thumb" onclick="openModal('https://eawosika.github.io/rialo-visualizations/world-credit-market-map.html', 'World credit markets')">
-          <img src="https://eawosika.github.io/rialo-visualizations/world-credit-market-map-v3.jpg" alt="World credit markets" loading="lazy">
+      <div class="card" data-url="https://eawosika.github.io/rialo-visualizations/world-credit-market-map.html" data-title="World credit markets" data-article="https://www.rialo.io/posts/upgrading-the-lending-stack">
+        <div class="card-thumb" onclick="openModal('https://eawosika.github.io/rialo-visualizations/world-credit-market-map.html', 'World credit markets', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">
+          <img src="https://eawosika.github.io/rialo-visualizations/thumb-credit-map.jpg" alt="World credit markets" loading="lazy">
           <div class="card-thumb-overlay">
             <span class="card-see">See visualization</span>
           </div>
@@ -158,16 +148,16 @@ html, body {
             <div class="card-desc">How consumer credit markets compare across G7 and BRICS economies.</div>
           </div>
           <div class="card-actions">
-            <button class="btn-see" onclick="openModal('https://eawosika.github.io/rialo-visualizations/world-credit-market-map.html', 'World credit markets')">See visualization</button>
+            <button class="btn-see" onclick="openModal('https://eawosika.github.io/rialo-visualizations/world-credit-market-map.html', 'World credit markets', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">See visualization</button>
             <a class="btn-ext" href="https://eawosika.github.io/rialo-visualizations/world-credit-market-map.html" target="_blank" title="Open in new tab">
               <svg width="13" height="13" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
             </a>
           </div>
         </div>
       </div>
-      <div class="card" data-url="https://eawosika.github.io/rialo-visualizations/cash-app-sofi-comparison.html" data-title="Cash App vs SoFi">
-        <div class="card-thumb" onclick="openModal('https://eawosika.github.io/rialo-visualizations/cash-app-sofi-comparison.html', 'Cash App vs SoFi')">
-          <img src="https://eawosika.github.io/rialo-visualizations/cash-app-sofi-comparison-v4.jpg" alt="Cash App vs SoFi" loading="lazy">
+      <div class="card" data-url="https://eawosika.github.io/rialo-visualizations/cash-app-sofi-comparison.html" data-title="Cash App vs SoFi" data-article="https://www.rialo.io/posts/upgrading-the-lending-stack">
+        <div class="card-thumb" onclick="openModal('https://eawosika.github.io/rialo-visualizations/cash-app-sofi-comparison.html', 'Cash App vs SoFi', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">
+          <img src="https://eawosika.github.io/rialo-visualizations/thumb-cash-app.jpg" alt="Cash App vs SoFi" loading="lazy">
           <div class="card-thumb-overlay">
             <span class="card-see">See visualization</span>
           </div>
@@ -178,15 +168,15 @@ html, body {
             <div class="card-desc">Two platforms that moved beyond FICO by controlling more of the lending stack.</div>
           </div>
           <div class="card-actions">
-            <button class="btn-see" onclick="openModal('https://eawosika.github.io/rialo-visualizations/cash-app-sofi-comparison.html', 'Cash App vs SoFi')">See visualization</button>
+            <button class="btn-see" onclick="openModal('https://eawosika.github.io/rialo-visualizations/cash-app-sofi-comparison.html', 'Cash App vs SoFi', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">See visualization</button>
             <a class="btn-ext" href="https://eawosika.github.io/rialo-visualizations/cash-app-sofi-comparison.html" target="_blank" title="Open in new tab">
               <svg width="13" height="13" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
             </a>
           </div>
         </div>
       </div>
-      <div class="card" data-url="https://eawosika.github.io/rialo-visualizations/native-data-access.html" data-title="Native data access">
-        <div class="card-thumb" onclick="openModal('https://eawosika.github.io/rialo-visualizations/native-data-access.html', 'Native data access')">
+      <div class="card" data-url="https://eawosika.github.io/rialo-visualizations/native-data-access.html" data-title="Native data access" data-article="https://www.rialo.io/posts/upgrading-the-lending-stack">
+        <div class="card-thumb" onclick="openModal('https://eawosika.github.io/rialo-visualizations/native-data-access.html', 'Native data access', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">
           <img src="https://eawosika.github.io/rialo-visualizations/native-data-access-default.jpg" alt="Native data access" loading="lazy">
           <div class="card-thumb-overlay">
             <span class="card-see">See visualization</span>
@@ -198,16 +188,16 @@ html, body {
             <div class="card-desc">How an onchain lending program on Rialo pulls borrower data directly into execution.</div>
           </div>
           <div class="card-actions">
-            <button class="btn-see" onclick="openModal('https://eawosika.github.io/rialo-visualizations/native-data-access.html', 'Native data access')">See visualization</button>
+            <button class="btn-see" onclick="openModal('https://eawosika.github.io/rialo-visualizations/native-data-access.html', 'Native data access', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">See visualization</button>
             <a class="btn-ext" href="https://eawosika.github.io/rialo-visualizations/native-data-access.html" target="_blank" title="Open in new tab">
               <svg width="13" height="13" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
             </a>
           </div>
         </div>
       </div>
-      <div class="card" data-url="https://eawosika.github.io/rialo-visualizations/loan-origination.html" data-title="Loan origination simulator">
-        <div class="card-thumb" onclick="openModal('https://eawosika.github.io/rialo-visualizations/loan-origination.html', 'Loan origination simulator')">
-          <img src="https://eawosika.github.io/rialo-visualizations/loan-origination-default.jpg" alt="Loan origination simulator" loading="lazy">
+      <div class="card" data-url="https://eawosika.github.io/rialo-visualizations/loan-origination.html" data-title="Loan origination simulator" data-article="https://www.rialo.io/posts/upgrading-the-lending-stack">
+        <div class="card-thumb" onclick="openModal('https://eawosika.github.io/rialo-visualizations/loan-origination.html', 'Loan origination simulator', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">
+          <img src="https://eawosika.github.io/rialo-visualizations/thumb-loan-orig.jpg" alt="Loan origination simulator" loading="lazy">
           <div class="card-thumb-overlay">
             <span class="card-see">See visualization</span>
           </div>
@@ -218,16 +208,16 @@ html, body {
             <div class="card-desc">Fill out a loan application and see how your profile determines eligibility and terms.</div>
           </div>
           <div class="card-actions">
-            <button class="btn-see" onclick="openModal('https://eawosika.github.io/rialo-visualizations/loan-origination.html', 'Loan origination simulator')">See visualization</button>
+            <button class="btn-see" onclick="openModal('https://eawosika.github.io/rialo-visualizations/loan-origination.html', 'Loan origination simulator', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">See visualization</button>
             <a class="btn-ext" href="https://eawosika.github.io/rialo-visualizations/loan-origination.html" target="_blank" title="Open in new tab">
               <svg width="13" height="13" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
             </a>
           </div>
         </div>
       </div>
-      <div class="card" data-url="https://eawosika.github.io/rialo-visualizations/loan-state-machine.html" data-title="Loan lifecycle simulator">
-        <div class="card-thumb" onclick="openModal('https://eawosika.github.io/rialo-visualizations/loan-state-machine.html', 'Loan lifecycle simulator')">
-          <img src="https://eawosika.github.io/rialo-visualizations/loan-state-machine-default.jpg" alt="Loan lifecycle simulator" loading="lazy">
+      <div class="card" data-url="https://eawosika.github.io/rialo-visualizations/loan-state-machine.html" data-title="Loan lifecycle simulator" data-article="https://www.rialo.io/posts/upgrading-the-lending-stack">
+        <div class="card-thumb" onclick="openModal('https://eawosika.github.io/rialo-visualizations/loan-state-machine.html', 'Loan lifecycle simulator', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">
+          <img src="https://eawosika.github.io/rialo-visualizations/thumb-loan-lifecycle.jpg" alt="Loan lifecycle simulator" loading="lazy">
           <div class="card-thumb-overlay">
             <span class="card-see">See visualization</span>
           </div>
@@ -238,7 +228,7 @@ html, body {
             <div class="card-desc">Make or skip payments across a 12-month loan and watch servicing and enforcement play out.</div>
           </div>
           <div class="card-actions">
-            <button class="btn-see" onclick="openModal('https://eawosika.github.io/rialo-visualizations/loan-state-machine.html', 'Loan lifecycle simulator')">See visualization</button>
+            <button class="btn-see" onclick="openModal('https://eawosika.github.io/rialo-visualizations/loan-state-machine.html', 'Loan lifecycle simulator', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">See visualization</button>
             <a class="btn-ext" href="https://eawosika.github.io/rialo-visualizations/loan-state-machine.html" target="_blank" title="Open in new tab">
               <svg width="13" height="13" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
             </a>
@@ -255,12 +245,15 @@ html, body {
     <div class="modal-header">
       <span class="modal-title" id="modal-title"></span>
       <div class="modal-header-actions">
-        <a class="modal-ext" id="modal-ext-link" href="#" target="_blank">
-          Open in full view
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
+        <a class="modal-read-article" id="modal-article-link" href="#" target="_blank">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          Read the article
+        </a>
+        <a class="modal-newtab" id="modal-newtab-link" href="#" target="_blank" title="Open in new tab">
+          <svg width="13" height="13" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
         </a>
         <button class="modal-close" onclick="closeModal(null)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
       </div>
     </div>
@@ -269,10 +262,7 @@ html, body {
 </div>
 
 <script>
-var currentView = 'grid';
-
 function setView(v) {
-  currentView = v;
   var c = document.getElementById('viz-container');
   c.className = v === 'grid' ? 'viz-grid' : 'viz-list';
   document.getElementById('btn-grid').className = 'view-btn' + (v === 'grid' ? ' active' : '');
@@ -280,10 +270,11 @@ function setView(v) {
   localStorage.setItem('rialo-viz-view', v);
 }
 
-function openModal(url, title) {
+function openModal(url, title, article) {
   document.getElementById('modal-title').textContent = title;
-  document.getElementById('modal-ext-link').href = url;
-  document.getElementById('modal-iframe').src = url;
+  document.getElementById('modal-article-link').href = article;
+  document.getElementById('modal-newtab-link').href = url;
+  document.getElementById('modal-iframe').src = url + '?embed=1&context=index';
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -299,7 +290,6 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeModal(null);
 });
 
-// Restore saved view
 var saved = localStorage.getItem('rialo-viz-view');
 if (saved) setView(saved);
 </script>
