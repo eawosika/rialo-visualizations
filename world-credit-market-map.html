@@ -80,7 +80,7 @@ svg.wmap{width:100%;display:block}
 .cpath:hover{fill:rgba(169,221,211,0.38)}
 .cpath.act{fill:rgba(169,221,211,0.42);stroke:#fff;stroke-width:1}
 .fpin{cursor:pointer}
-.overlay{display:none;position:absolute;top:10px;right:10px;width:330px;max-height:calc(100% - 20px);overflow-y:auto;-webkit-overflow-scrolling:touch;background:#0f0f0f;border:1px solid rgba(169,221,211,0.25);border-radius:10px;padding:14px;box-shadow:0 8px 32px rgba(0,0,0,0.8)}
+.overlay{display:none;position:absolute;top:10px;right:10px;width:330px;max-height:calc(100% - 20px);overflow-y:auto;background:#0f0f0f;border:1px solid rgba(169,221,211,0.25);border-radius:10px;padding:14px;box-shadow:0 8px 32px rgba(0,0,0,0.8)}
 .overlay.vis{display:block}
 .ovc{position:absolute;top:9px;right:10px;background:none;border:none;color:rgba(240,238,234,0.35);font-size:17px;cursor:pointer;padding:0;line-height:1;font-family:system-ui}
 .ovc:hover{color:#f0eeea}
@@ -104,57 +104,6 @@ svg.wmap{width:100%;display:block}
 sup{font-size:8px;color:#a9ddd3;vertical-align:super;line-height:0}
 #sg-wrap sup{font-size:7px;color:#a9ddd3;vertical-align:super;line-height:0}
 
-
-@media (max-width: 600px) {
-  /* ── Layout ── */
-  #page { padding: 0.75rem; }
-  #page-header { flex-direction: column; gap: 8px; align-items: flex-start; }
-  .toprow { margin-bottom: 6px; }
-  .hl { font-size: 13px; }
-  .cta { font-size: 10px; margin-top: 5px; }
-  .action-row { gap: 6px; padding-top: 8px; }
-  .action-btn { font-size: 10px; padding: 4px 9px; }
-  .read-article { font-size: 10px; padding: 4px 9px; }
-  .share-menu { min-width: 160px; right: 0; }
-  .share-item { font-size: 10px; }
-
-  /* ── Map: bigger on mobile so countries are tappable ── */
-  svg.wmap { max-height: 380px; }
-  .mapwrap { border-radius: 8px; }
-
-  /* ── Overlay: floating card on mobile ── */
-  .overlay {
-    position: fixed !important;
-    top: auto !important;
-    bottom: 16px !important;
-    left: 14px !important;
-    right: 14px !important;
-    width: auto !important;
-    max-height: 62vh !important;
-    border-radius: 12px !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    padding: 16px 16px 24px 16px !important;
-    box-sizing: border-box !important;
-    z-index: 999 !important;
-    border: 1px solid rgba(169,221,211,0.25) !important;
-  }
-
-  /* ── Fact sheet: compact ── */
-  .ovh { gap: 7px; margin-bottom: 7px; padding-bottom: 7px; }
-  .cn { font-size: 11px; }
-  .cs { font-size: 8.5px; }
-  .hero { padding: 7px 9px; margin-bottom: 6px; }
-  .hv { font-size: 17px; }
-  .hl2 { font-size: 9px; }
-  .sec { font-size: 7.5px; margin: 5px 0 2px; }
-  .row { font-size: 9.5px; padding: 2px 0; }
-  .note { font-size: 8.5px; padding: 5px 7px; margin-top: 6px; }
-  .src-title { font-size: 7.5px; }
-  .src-item { font-size: 8px; }
-  .ovc { font-size: 20px; top: 8px; right: 10px; }
-  .sources { margin-top: 7px; padding-top: 6px; }
-}
 </style>
 </head>
 <body>
@@ -164,7 +113,10 @@ sup{font-size:8px;color:#a9ddd3;vertical-align:super;line-height:0}
     <span style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#a9ddd3;margin-bottom:3px;display:block">Rialo</span>
     <span style="font-size:13px;color:rgba(240,238,234,0.5)">Interactive visualization</span>
   </div>
-  <a class="read-article" id="read-article-btn" href="#" target="_blank">Read the article<svg width="11" height="11" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg></a>
+  <a class="read-article" href="https://rialo.io/posts/upgrading-the-lending-stack" target="_blank">
+    Read the article
+    <svg width="11" height="11" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
+  </a>
 </div>
 
 <div id="wm">
@@ -174,7 +126,7 @@ sup{font-size:8px;color:#a9ddd3;vertical-align:super;line-height:0}
       <span class="hl">How credit markets compare around the world</span>
       <span class="cta">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#a9ddd3" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        Click on a country to explore its credit market
+        Click on a country to explore local consumer credit in detail
       </span>
     </div>
   </div>
@@ -261,7 +213,7 @@ sup{font-size:8px;color:#a9ddd3;vertical-align:super;line-height:0}
       </button>
     </div>
   </div>
-    <a class="action-btn" href="https://eawosika.github.io/rialo-visualizations/world-credit-market-map-v1.jpg" download>Download as JPG</a>
+    <button class="action-btn" id="sg-dl">Download as JPG</button>
   </div>
 </div>
 <script>
@@ -448,44 +400,6 @@ function closeOv(){
   document.getElementById('ov').classList.remove('vis');
   document.querySelectorAll('.cpath').forEach(function(p){p.classList.remove('act')});
 }
-document.querySelector('.mapwrap').addEventListener('click', function(e){
-  var ov = document.getElementById('ov');
-  if(ov.classList.contains('vis') && !ov.contains(e.target) && !e.target.closest('.cpath') && !e.target.closest('.fpin')){
-    closeOv();
-  }
-});
-
-// iframe height reporting
-// Detect iframe embedding and apply scrollable overlay
-try {
-  if (window.self !== window.top) {
-    document.body.classList.add('embedded');
-  }
-} catch(e) {
-  document.body.classList.add('embedded');
-}
-
-function reportHeight() {
-  var page = document.getElementById('page');
-  if (!page) return;
-  var rect = page.getBoundingClientRect();
-  var height = Math.ceil(rect.height) + 20;
-  window.parent.postMessage({ type: 'rialo-viz-height', height: height }, '*');
-}
-window.addEventListener('load', function() {
-  reportHeight();
-  setTimeout(reportHeight, 200);
-  setTimeout(reportHeight, 500);
-  setTimeout(reportHeight, 1000);
-  setTimeout(reportHeight, 2000);
-});
-window.addEventListener('resize', reportHeight);
-// Fire whenever DOM changes (e.g. map SVG finishes rendering)
-if (window.MutationObserver) {
-  var _obs = new MutationObserver(function() { reportHeight(); });
-  _obs.observe(document.body, { childList: true, subtree: true, attributes: false });
-  setTimeout(function() { _obs.disconnect(); }, 3000);
-}
 
 // Build static grid with full fact sheets and global source numbering
 var G7 = ['ca','us','uk','de'];
@@ -556,6 +470,27 @@ function buildGrid(){
 }
 document.addEventListener('DOMContentLoaded', function(){
   buildGrid();
+  document.getElementById('sg-dl').addEventListener('click', function(){
+    var wrap = document.getElementById('sg-wrap');
+    wrap.style.position = 'absolute';
+    wrap.style.top = '0';
+    wrap.style.left = '0';
+    wrap.style.zIndex = '-1';
+    setTimeout(function(){
+      var w = wrap.scrollWidth;
+      var h = wrap.scrollHeight;
+      html2canvas(wrap,{backgroundColor:'#0a0a0a',scale:2,useCORS:true,logging:false,width:w,height:h,windowWidth:w,windowHeight:h}).then(function(canvas){
+        var link = document.createElement('a');
+        link.download = 'consumer-credit-markets.jpg';
+        link.href = canvas.toDataURL('image/jpeg',0.95);
+        link.click();
+        wrap.style.position = 'fixed';
+        wrap.style.top = '-9999px';
+        wrap.style.left = '-9999px';
+        wrap.style.zIndex = '';
+      });
+    }, 50);
+  });
 }); // DOMContentLoaded
 
 </script>
@@ -587,8 +522,9 @@ document.addEventListener('DOMContentLoaded', function(){
   </div>
   <div id="sg-inner"></div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
-var PAGE_URL = 'https://eawosika.github.io/rialo-visualizations/world-credit-market-map.html';
+var PAGE_URL = window.location.href;
 var PAGE_TITLE = 'Global Consumer Credit Markets \u2014 Rialo';
 var PAGE_DESC = 'How consumer credit markets compare around the world: household debt, credit growth, scoring models, and regulators across eight major economies.';
 
@@ -621,27 +557,30 @@ document.getElementById('share-copy').addEventListener('click', function(){
 </script>
 </div>
 <script>
+// Report page height to parent iframe
+function reportHeight(){
+  var h = document.body.scrollHeight;
+  if(window.parent !== window){
+    window.parent.postMessage({type:'viz-height', height: h}, '*');
+  }
+}
+window.addEventListener('load', reportHeight);
+window.addEventListener('resize', reportHeight);
+// Also report after grid builds and overlays open
+var _origBuildGrid = typeof buildGrid === 'function' ? buildGrid : null;
+setTimeout(reportHeight, 500);
 </script>
 
 <script>
-(function(){
-  var btn = document.getElementById('read-article-btn');
-  var ARTICLE_URL = 'https://www.rialo.io/posts/upgrading-the-lending-stack';
-  var STANDALONE_URL = 'https://eawosika.github.io/rialo-visualizations/world-credit-market-map.html';
-  if (window.self !== window.top) {
-    // Inside iframe — point to standalone
-    btn.href = STANDALONE_URL;
-    btn.target = '_blank';
-    btn.querySelector ? btn.childNodes[0].textContent = 'Open in full view' : null;
-    // Set text node (first child is the text)
-    btn.firstChild.nodeValue = 'Open in full view';
-  } else {
-    // Standalone — point to article
-    btn.href = ARTICLE_URL;
-    btn.target = '_blank';
-    btn.firstChild.nodeValue = 'Read the article';
-  }
-})();
+function reportHeight() {
+  var height = document.body.scrollHeight;
+  window.parent.postMessage({ type: 'rialo-viz-height', height: height }, '*');
+}
+window.addEventListener('load', reportHeight);
+window.addEventListener('resize', reportHeight);
+// Also report after buildGrid runs
+var _origBuildGrid = typeof buildGrid !== 'undefined' ? buildGrid : null;
+if (document.readyState === 'complete') { setTimeout(reportHeight, 300); }
 </script>
 </body>
 </html>
