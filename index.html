@@ -42,9 +42,8 @@ html, body { background: #0a0a0a; font-family: 'Roobert', system-ui, sans-serif;
 .viz-list .card-thumb { height: 100%; min-height: 120px; aspect-ratio: unset; }
 .viz-list .card-thumb img { height: 100%; object-fit: cover; }
 .viz-list .card-body { padding: 16px 18px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-.viz-list .card-actions { flex-direction: row; gap: 8px; flex-shrink: 0; }
 
-.card { background: #111; border: 1px solid rgba(169,221,211,0.12); border-radius: 10px; overflow: hidden; transition: border-color 0.15s; }
+.card { background: #111; border: 1px solid rgba(169,221,211,0.12); border-radius: 10px; overflow: hidden; transition: border-color 0.15s; cursor: pointer; }
 .card:hover { border-color: rgba(169,221,211,0.3); }
 
 .card-thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; cursor: pointer; }
@@ -54,14 +53,9 @@ html, body { background: #0a0a0a; font-family: 'Roobert', system-ui, sans-serif;
 .card:hover .card-thumb-overlay { opacity: 1; }
 .card-see { font-size: 11px; color: #a9ddd3; border: 1px solid rgba(169,221,211,0.4); border-radius: 6px; padding: 6px 14px; background: rgba(10,10,10,0.7); }
 
-.card-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
+.card-body { padding: 14px 16px; }
 .card-title { font-size: 13px; font-weight: 500; color: #f0eeea; margin-bottom: 3px; }
 .card-desc { font-size: 11px; color: rgba(240,238,234,0.45); line-height: 1.55; }
-.card-actions { display: flex; align-items: center; gap: 8px; }
-.btn-see { font-size: 11px; padding: 5px 12px; border-radius: 6px; background: rgba(169,221,211,0.07); border: 1px solid rgba(169,221,211,0.25); color: #a9ddd3; cursor: pointer; font-family: 'Roobert', system-ui, sans-serif; transition: background 0.15s, border-color 0.15s; white-space: nowrap; }
-.btn-see:hover { background: rgba(169,221,211,0.12); border-color: rgba(169,221,211,0.45); }
-.btn-ext { display: inline-flex; align-items: center; justify-content: center; padding: 6px; border-radius: 6px; border: 1px solid rgba(240,238,234,0.1); color: rgba(240,238,234,0.35); text-decoration: none; transition: all 0.15s; }
-.btn-ext:hover { border-color: rgba(169,221,211,0.3); color: #a9ddd3; }
 
 /* Modal */
 .modal-overlay {
@@ -146,14 +140,7 @@ html, body { background: #0a0a0a; font-family: 'Roobert', system-ui, sans-serif;
           <div class="card-info">
             <div class="card-title">World credit markets</div>
             <div class="card-desc">How consumer credit markets compare across G7 and BRICS economies.</div>
-          </div>
-          <div class="card-actions">
-            <button class="btn-see" onclick="openModal('https://eawosika.github.io/rialo-visualizations/world-credit-market-map.html', 'World credit markets', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">See visualization</button>
-            <a class="btn-ext" href="https://eawosika.github.io/rialo-visualizations/world-credit-market-map.html" target="_blank" title="Open in new tab">
-              <svg width="13" height="13" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
-            </a>
-          </div>
-        </div>
+          </div></div>
       </div>
       <div class="card" data-url="https://eawosika.github.io/rialo-visualizations/cash-app-sofi-comparison.html" data-title="Cash App vs SoFi" data-article="https://www.rialo.io/posts/upgrading-the-lending-stack">
         <div class="card-thumb" onclick="openModal('https://eawosika.github.io/rialo-visualizations/cash-app-sofi-comparison.html', 'Cash App vs SoFi', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">
@@ -166,14 +153,7 @@ html, body { background: #0a0a0a; font-family: 'Roobert', system-ui, sans-serif;
           <div class="card-info">
             <div class="card-title">Cash App vs SoFi</div>
             <div class="card-desc">Two platforms that moved beyond FICO by controlling more of the lending stack.</div>
-          </div>
-          <div class="card-actions">
-            <button class="btn-see" onclick="openModal('https://eawosika.github.io/rialo-visualizations/cash-app-sofi-comparison.html', 'Cash App vs SoFi', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">See visualization</button>
-            <a class="btn-ext" href="https://eawosika.github.io/rialo-visualizations/cash-app-sofi-comparison.html" target="_blank" title="Open in new tab">
-              <svg width="13" height="13" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
-            </a>
-          </div>
-        </div>
+          </div></div>
       </div>
       <div class="card" data-url="https://eawosika.github.io/rialo-visualizations/native-data-access.html" data-title="Native data access" data-article="https://www.rialo.io/posts/upgrading-the-lending-stack">
         <div class="card-thumb" onclick="openModal('https://eawosika.github.io/rialo-visualizations/native-data-access.html', 'Native data access', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">
@@ -186,14 +166,7 @@ html, body { background: #0a0a0a; font-family: 'Roobert', system-ui, sans-serif;
           <div class="card-info">
             <div class="card-title">Native data access</div>
             <div class="card-desc">How an onchain lending program on Rialo pulls borrower data directly into execution.</div>
-          </div>
-          <div class="card-actions">
-            <button class="btn-see" onclick="openModal('https://eawosika.github.io/rialo-visualizations/native-data-access.html', 'Native data access', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">See visualization</button>
-            <a class="btn-ext" href="https://eawosika.github.io/rialo-visualizations/native-data-access.html" target="_blank" title="Open in new tab">
-              <svg width="13" height="13" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
-            </a>
-          </div>
-        </div>
+          </div></div>
       </div>
       <div class="card" data-url="https://eawosika.github.io/rialo-visualizations/loan-origination.html" data-title="Loan origination simulator" data-article="https://www.rialo.io/posts/upgrading-the-lending-stack">
         <div class="card-thumb" onclick="openModal('https://eawosika.github.io/rialo-visualizations/loan-origination.html', 'Loan origination simulator', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">
@@ -206,14 +179,7 @@ html, body { background: #0a0a0a; font-family: 'Roobert', system-ui, sans-serif;
           <div class="card-info">
             <div class="card-title">Loan origination simulator</div>
             <div class="card-desc">Fill out a loan application and see how your profile determines eligibility and terms.</div>
-          </div>
-          <div class="card-actions">
-            <button class="btn-see" onclick="openModal('https://eawosika.github.io/rialo-visualizations/loan-origination.html', 'Loan origination simulator', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">See visualization</button>
-            <a class="btn-ext" href="https://eawosika.github.io/rialo-visualizations/loan-origination.html" target="_blank" title="Open in new tab">
-              <svg width="13" height="13" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
-            </a>
-          </div>
-        </div>
+          </div></div>
       </div>
       <div class="card" data-url="https://eawosika.github.io/rialo-visualizations/loan-state-machine.html" data-title="Loan lifecycle simulator" data-article="https://www.rialo.io/posts/upgrading-the-lending-stack">
         <div class="card-thumb" onclick="openModal('https://eawosika.github.io/rialo-visualizations/loan-state-machine.html', 'Loan lifecycle simulator', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">
@@ -226,14 +192,7 @@ html, body { background: #0a0a0a; font-family: 'Roobert', system-ui, sans-serif;
           <div class="card-info">
             <div class="card-title">Loan lifecycle simulator</div>
             <div class="card-desc">Make or skip payments across a 12-month loan and watch servicing and enforcement play out.</div>
-          </div>
-          <div class="card-actions">
-            <button class="btn-see" onclick="openModal('https://eawosika.github.io/rialo-visualizations/loan-state-machine.html', 'Loan lifecycle simulator', 'https://www.rialo.io/posts/upgrading-the-lending-stack')">See visualization</button>
-            <a class="btn-ext" href="https://eawosika.github.io/rialo-visualizations/loan-state-machine.html" target="_blank" title="Open in new tab">
-              <svg width="13" height="13" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
-            </a>
-          </div>
-        </div>
+          </div></div>
       </div>
   </div>
 
@@ -250,7 +209,7 @@ html, body { background: #0a0a0a; font-family: 'Roobert', system-ui, sans-serif;
           Read the article
         </a>
         <a class="modal-newtab" id="modal-newtab-link" href="#" target="_blank">
-          Open in new tab
+          View standalone page
           <svg width="11" height="11" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2H2a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V6"/><path d="M7 1h2v2"/><line x1="10" y1="1" x2="5" y2="6"/></svg>
         </a>
         <button class="modal-close" onclick="closeModal(null)">
