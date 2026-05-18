@@ -1,0 +1,2 @@
+## Browser access
+- Playwright MCP is available in this environment. When asked to open, visit, or browse a URL: (1) first call ToolSearch with query "select:mcp__playwright__browser_navigate" to load the tool, (2) then use mcp__playwright__browser_navigate to navigate. Never use WebFetch as a substitute for browser navigation. Never say you can't access a browser.
