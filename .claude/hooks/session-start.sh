@@ -5,8 +5,9 @@ if [ "${CLAUDE_CODE_REMOTE:-}" != "true" ]; then
 fi
 cd "$CLAUDE_PROJECT_DIR"
 npm install 2>/dev/null || true
-npx @playwright/mcp install-browser chromium 2>/dev/null || true
+npm install -g @playwright/mcp@latest 2>/dev/null || true
+npx playwright install chromium 2>/dev/null || true
 claude mcp remove playwright 2>/dev/null || true
-claude mcp add playwright npx @playwright/mcp@latest -- \
+claude mcp add --scope user playwright playwright-mcp -- \
   --config "$CLAUDE_PROJECT_DIR/.claude/playwright-mcp.config.json" \
   --headless
