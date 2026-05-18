@@ -1,0 +1,11 @@
+{
+  "browser": {
+    "browserName": "chromium",
+    "launchOptions": {
+      "args": ["--disable-quic", "--no-sandbox"]
+    },
+    "contextOptions": {
+      "ignoreHTTPSErrors": true
+    }
+  }
+}
