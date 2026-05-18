@@ -1,8 +1,10 @@
 {
   "browser": {
     "browserName": "chromium",
+    "channel": "chrome",
     "launchOptions": {
-      "args": ["--disable-quic", "--no-sandbox"]
+      "args": ["--disable-quic", "--no-sandbox"],
+      "userDataDir": "C:/Users/awosi/AppData/Local/Google/Chrome/User Data"
     },
     "contextOptions": {
       "ignoreHTTPSErrors": true
