@@ -1,2 +1,5 @@
 ## Browser access
-- Playwright MCP is available in this environment. When asked to open, visit, or browse a URL: (1) first call ToolSearch with query "select:mcp__playwright__browser_navigate" to load the tool, (2) then use mcp__playwright__browser_navigate to navigate. Never use WebFetch as a substitute for browser navigation. Never say you can't access a browser.
+- Playwright MCP is availab
+
+## Dev server
+When making frontend changes that need visual verification, start the dev server automatically (check package.json for the right command), use browser tools to verify the changes look correct at desktop (1280px) and mobile (375px), and stop the server when done. Don't ask whether to start it — just do it.
