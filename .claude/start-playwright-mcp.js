@@ -4,6 +4,11 @@ const path = require("path");
 const fs = require("fs");
 const os = require("os");
 
+// Derive absolute paths from the running node binary — never rely on PATH
+const nodeBin = path.dirname(process.execPath);
+const npx = path.join(nodeBin, process.platform === "win32" ? "npx.cmd" : "npx");
+const globalPwMcp = path.join(nodeBin, process.platform === "win32" ? "playwright-mcp.cmd" : "playwright-mcp");
+
 function findPlaywrightChromium() {
   const cacheDir = process.env.PLAYWRIGHT_BROWSERS_PATH ||
     path.join(os.homedir(), ".cache", "ms-playwright");
@@ -23,8 +28,7 @@ function findPlaywrightChromium() {
 }
 
 function findFallbackChrome() {
-  const home = os.homedir();
-  const puppeteerBase = path.join(home, ".cache", "puppeteer", "chrome");
+  const puppeteerBase = path.join(os.homedir(), ".cache", "puppeteer", "chrome");
   if (fs.existsSync(puppeteerBase)) {
     for (const ver of fs.readdirSync(puppeteerBase)) {
       for (const rel of ["chrome-linux64/chrome", "chrome-win64/chrome.exe"]) {
@@ -34,43 +38,38 @@ function findFallbackChrome() {
     }
   }
   for (const p of [
-    "/usr/bin/google-chrome-stable",
-    "/usr/bin/google-chrome",
-    "/usr/bin/chromium-browser",
-    "/usr/bin/chromium",
-    "/opt/google/chrome/chrome",
-    "/snap/bin/chromium",
+    "/usr/bin/google-chrome-stable", "/usr/bin/google-chrome",
+    "/usr/bin/chromium-browser", "/usr/bin/chromium",
+    "/opt/google/chrome/chrome", "/snap/bin/chromium",
   ]) {
     try { if (fs.statSync(p).isFile()) return p; } catch (e) {}
   }
   return null;
 }
 
-const args = [
-  "@playwright/mcp@latest",
-  "--config", path.join(__dirname, "playwright-mcp.config.json"),
-  "--headless"
-];
+const configPath = path.join(__dirname, "playwright-mcp.config.json");
+const extraArgs = [];
 
-if (findPlaywrightChromium()) {
-  // Already installed — start immediately
-} else {
-  // Try to install; if it fails, fall back to any available Chrome
+if (!findPlaywrightChromium()) {
   let installed = false;
   try {
-    execFileSync("npx", ["@playwright/mcp", "install-browser", "chromium"],
+    execFileSync(npx, ["@playwright/mcp", "install-browser", "chromium"],
       { stdio: "ignore", timeout: 120000 });
     installed = true;
   } catch (e) {}
-
   if (!installed) {
     const fallback = findFallbackChrome();
     if (fallback) {
-      process.stderr.write("[playwright-mcp] using fallback Chrome: " + fallback + "\n");
-      args.push("--executable-path", fallback);
+      process.stderr.write("[playwright-mcp] fallback Chrome: " + fallback + "\n");
+      extraArgs.push("--executable-path", fallback);
     }
   }
 }
 
-const proc = spawn("npx", args, { stdio: "inherit" });
+// Use globally installed playwright-mcp if present (faster); otherwise npx
+const [cmd, cmdArgs] = fs.existsSync(globalPwMcp)
+  ? [globalPwMcp, ["--config", configPath, "--headless", ...extraArgs]]
+  : [npx, ["@playwright/mcp@latest", "--config", configPath, "--headless", ...extraArgs]];
+
+const proc = spawn(cmd, cmdArgs, { stdio: "inherit" });
 proc.on("exit", code => process.exit(code || 0));
