@@ -8,6 +8,7 @@ npm install 2>/dev/null || true
 npm install -g @playwright/mcp@latest 2>/dev/null || true
 npx playwright install chromium 2>/dev/null || true
 claude mcp remove playwright 2>/dev/null || true
-claude mcp add --scope user playwright playwright-mcp -- \
+PWMCP=$(which playwright-mcp 2>/dev/null || echo "playwright-mcp")
+claude mcp add --scope user playwright "$PWMCP" -- \
   --config "$CLAUDE_PROJECT_DIR/.claude/playwright-mcp.config.json" \
   --headless
